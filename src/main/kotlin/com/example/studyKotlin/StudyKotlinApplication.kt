@@ -9,5 +9,4 @@ class StudyKotlinApplication
 
 fun main(args: Array<String>) {
 	runApplication<StudyKotlinApplication>(*args)
-	println("test")
 }
