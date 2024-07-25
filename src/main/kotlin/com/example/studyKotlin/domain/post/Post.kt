@@ -1,4 +1,4 @@
-package com.example.studyKotlin.domain
+package com.example.studyKotlin.domain.post
 
 import jakarta.persistence.*
 import org.apache.tomcat.util.codec.binary.StringUtils
