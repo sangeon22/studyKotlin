@@ -10,10 +10,10 @@ class Member(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long,
 
-        @Column(name = "title", nullable = false)
+        @Column(name = "email", nullable = false)
         var email: String,
 
-        @Column(name = "content")
+        @Column(name = "password")
         var password: String,
 
         @Enumerated(EnumType.STRING)
