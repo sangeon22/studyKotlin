@@ -1,26 +1,26 @@
 package com.example.studyKotlin.domain.member
 
+import com.example.studyKotlin.domain.AuditingEntity
 import jakarta.persistence.*
 
 @Entity
 @Table(name = "Member")
 class Member(
+        email: String,
+        password: String,
+        role: Role
+) : AuditingEntity() {
+    @Column(name = "email", nullable = false)
+    var email: String = email
+        protected set
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long,
+    @Column(name = "password")
+    var password: String = password
+        protected set
 
-        @Column(name = "email", nullable = false)
-        var email: String,
-
-        @Column(name = "password")
-        var password: String,
-
-        @Enumerated(EnumType.STRING)
-        var role: Role
-
-) {
-
+    @Enumerated(EnumType.STRING)
+    var role: Role = role
+        protected set
 }
 
 enum class Role {
