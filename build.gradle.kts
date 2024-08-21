@@ -6,13 +6,6 @@ plugins {
 	kotlin("plugin.spring") version "1.9.24"
 }
 
-// private set
-allOpen {
-	annotations("javax.persistence.Entity")
-	annotations("javax.persistence.Embeddable")
-	annotations("javax.persistence.MappedSuperClass")
-}
-
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
@@ -27,18 +20,14 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	//implementation("org.springframework.boot:spring-boot-starter-security")
+//	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-//	 implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
-	 runtimeOnly("com.mysql:mysql-connector-j")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	// testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3")
-	//testImplementation("org.springframework.security:spring-security-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+//	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+//	implementation("mysql:mysql-connector-java:8.0.33")
+//	testImplementation("org.springframework.boot:spring-boot-starter-test")
+//	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 kotlin {
@@ -49,4 +38,10 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+allOpen {
+	annotations("jakarta.persistence.Entity")
+	annotations("jakarta.persistence.Embeddable")
+	annotations("jakarta.persistence.MappedSuperclass")
 }
