@@ -42,6 +42,9 @@ fun main(args: Array<String>) {
     val rectangle = Rectangle(10, 10)
     println("isSquare: ${rectangle.isSquare}")
 
+    println(Color.BLUE.rgb())
+    println(Color.GREEN)
+
 }
 
 data class Person1(
