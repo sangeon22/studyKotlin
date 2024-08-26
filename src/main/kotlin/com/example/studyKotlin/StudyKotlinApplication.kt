@@ -11,7 +11,7 @@ import org.springframework.boot.runApplication
 //@EnableJpaAuditing
 class StudyKotlinApplication
 
-fun main() {
+fun main(args: Array<String>) {
     val persons = listOf(Person("상언"), Person("철수", age = 28))
     val age = persons.maxBy { it.age ?: 0 }
     println("age: $age")
@@ -24,6 +24,9 @@ fun main() {
     println("valMessage: ${valAndVar("F")}")
 
     println(valRef())
+
+    stringTem(arrayOf("eoni"))
+    stringTem(arrayOf())
 }
 
 data class Person(
@@ -71,8 +74,21 @@ fun valRef(): Unit {
     lang.add("Kotlin")
     println("$lang")
 }
+
 fun varRef() {
     var answer = 10
 //    answer = "TEST"
     //Type mismatch: inferred type is String but Int was expected
+}
+
+fun stringTem(args: Array<String>) {
+    var name = ""
+    if (args.isNotEmpty()) {
+        name = args[0]
+        println("args[0]: ${args[0]}")
+    } else {
+        name = "Kotlin"
+    }
+    println("\${name}, $name!")
+    println("\${if}:, ${if (args.isNotEmpty()) args[0] else "Kotlin"}")
 }
