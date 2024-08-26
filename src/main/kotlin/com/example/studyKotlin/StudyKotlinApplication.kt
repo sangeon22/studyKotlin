@@ -2,6 +2,8 @@
 
 package com.example.studyKotlin
 
+import com.example.studyKotlin.domain.Person
+import com.example.studyKotlin.domain.Rectangle
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -12,7 +14,7 @@ import org.springframework.boot.runApplication
 class StudyKotlinApplication
 
 fun main(args: Array<String>) {
-    val persons = listOf(Person("상언"), Person("철수", age = 28))
+    val persons = listOf(Person1("상언"), Person1("철수", age = 28))
     val age = persons.maxBy { it.age ?: 0 }
     println("age: $age")
 
@@ -27,9 +29,22 @@ fun main(args: Array<String>) {
 
     stringTem(arrayOf("eoni"))
     stringTem(arrayOf())
+
+    // java: Person person = new Person("eoni", false);
+    // System.out.println(peron.getName());
+    // person.setMarried(true);
+    val person = Person("eoni", false)
+    println(person.name)
+    println(person.isMarried)
+    person.isMarried = true
+    println(person.isMarried)
+
+    val rectangle = Rectangle(10, 10)
+    println("isSquare: ${rectangle.isSquare}")
+
 }
 
-data class Person(
+data class Person1(
     val name: String,
     val age: Int? = null
 )
