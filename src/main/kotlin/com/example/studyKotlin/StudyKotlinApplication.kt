@@ -6,6 +6,7 @@ import com.example.studyKotlin.Color.*
 import com.example.studyKotlin.domain.Person
 import com.example.studyKotlin.domain.Rectangle
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import java.util.TreeMap
 
 @SpringBootApplication
 //@EnableJpaAuditing
@@ -56,6 +57,26 @@ fun main(args: Array<String>) {
     println(eval(Sum(Sum(Num(1), Num(2)), Num(4))))
     println(evalOptimized(Sum(Sum(Num(1), Num(2)), Num(4))))
     println(evalWithLogging(Sum(Sum(Num(1), Num(2)), Num(4))))
+
+    for (i in 1..100) print(fizzBuzz(i))
+    println()
+
+    // 끝 값 미포함 하려면 until
+    for (i in 1 until 100) print(fizzBuzz(i))
+    println()
+
+    // 역방향 100 -> 1으로 2씩 증가(역방향이니 -2)
+    for (i in 100 downTo 1 step 2) print(fizzBuzz(i))
+
+    mapIterator()
+    collectionIterator()
+
+    println(isLetter('A'))
+    println(isNotDigit('A'))
+    println(isNotDigit('1'))
+    println(recognize('1'))
+    println(recognize('A'))
+    println(recognize('@'))
 }
 
 
@@ -177,7 +198,7 @@ fun eval(e: Expr): Int {
     throw IllegalArgumentException("Unknown expression")
 }
 
-fun evalOptimized(e: Expr) : Int =
+fun evalOptimized(e: Expr): Int =
     when (e) {
         is Num -> e.value
         is Sum -> evalOptimized(e.left) + evalOptimized(e.right)
@@ -190,6 +211,7 @@ fun evalWithLogging(e: Expr): Int =
             println("num: ${e.value}")
             e.value
         }
+
         is Sum -> {
             val left = evalWithLogging(e.left)
             val right = evalWithLogging(e.right)
@@ -197,5 +219,54 @@ fun evalWithLogging(e: Expr): Int =
             // 블록 마지막이 반환 값이 됨 -> scope 함수 let? 이랑 비슷하게 생각하면 될듯
             left + right
         }
+
         else -> throw IllegalArgumentException("Unknown expression")
     }
+
+fun fizzBuzz(i: Int) = when {
+    i % 15 == 0 -> "FizzBuzz "
+    i % 3 == 0 -> "Fizz "
+    i % 5 == 0 -> "Buzz "
+    else -> "$i "
+}
+
+
+fun mapIterator() {
+    val binaryReps = TreeMap<Char, String>()
+    for (i in 'A'..'F') {
+        //deprecated toInt()
+//        val binary = Integer.toBinaryString(i.toInt())
+        val binary = Integer.toBinaryString(i.code)
+
+        //java: binaryReps.put(i, binary)
+        binaryReps[i] = binary
+    }
+
+    // Map.key -> letter
+    // Map.value -> binary
+    for ((letter, binary) in binaryReps) {
+        println("$letter = $binary")
+    }
+}
+
+fun collectionIterator() {
+    val list = arrayListOf("10", "11", "1001", "11")
+    for ((idx, element) in list.withIndex()) {
+        println("$idx: $element")
+    }
+
+    // document 보다가 궁금해서
+    for (element in list.distinct()){
+        println(element)
+    }
+}
+
+fun isLetter(c: Char) = c in 'a'..'z' || c in 'A'..'Z'
+
+fun isNotDigit(c: Char) = c !in '0'..'9'
+
+fun recognize(c: Char) = when(c) {
+    in '0'..'9' -> "It's a digit"
+    in 'a'..'z', in 'A'..'Z' -> "It's a letter"
+    else -> "no"
+}
