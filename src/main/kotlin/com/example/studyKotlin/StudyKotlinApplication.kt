@@ -83,8 +83,9 @@ fun main(args: Array<String>) {
     println(readNum(BufferedReader(StringReader("234"))))
     println(readNum(BufferedReader(StringReader("abc"))))
     readNum2(BufferedReader(StringReader("abc")))
-}
 
+    collectionFunction()
+}
 
 data class Person1(
     val name: String,
@@ -296,4 +297,28 @@ fun readNum2(r: BufferedReader) {
         null
     }
     println(num)
+}
+
+fun collectionFunction() {
+    val set = hashSetOf(1, 5, 53)
+    val list = listOf(1, 5, 53)
+    val map = mapOf(
+        // to 는 map 키워드가 아님 -> 일반 함수임 레퍼런스 확인해보기
+        1 to "one",
+        5 to "five",
+        53 to "fifty-three"
+    )
+    // java에서 getClass()
+    // 같은 java.util 클래스를 사용하므로 상호작용이 더 쉬움, 변환 필요 x
+    println(set.javaClass)
+    println(list.javaClass)
+    println(map.javaClass)
+
+    println(set)
+    println(list)
+    println(map)
+
+    // 그러나 코틀린에서는 컬렉션의 더 많은 기능 제공
+    println(list.last())
+    println(set.min())
 }
