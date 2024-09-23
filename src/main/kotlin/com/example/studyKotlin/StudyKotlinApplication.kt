@@ -6,6 +6,8 @@ import com.example.studyKotlin.Color.*
 import com.example.studyKotlin.domain.Person
 import com.example.studyKotlin.domain.Rectangle
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import java.io.BufferedReader
+import java.io.StringReader
 import java.util.TreeMap
 
 @SpringBootApplication
@@ -77,6 +79,10 @@ fun main(args: Array<String>) {
     println(recognize('1'))
     println(recognize('A'))
     println(recognize('@'))
+
+    println(readNum(BufferedReader(StringReader("234"))))
+    println(readNum(BufferedReader(StringReader("abc"))))
+    readNum2(BufferedReader(StringReader("abc")))
 }
 
 
@@ -269,4 +275,25 @@ fun recognize(c: Char) = when(c) {
     in '0'..'9' -> "It's a digit"
     in 'a'..'z', in 'A'..'Z' -> "It's a letter"
     else -> "no"
+}
+
+fun readNum(r: BufferedReader) :Int? {
+    try {
+        val line = r.readLine()
+        return Integer.parseInt(line)
+    } catch (e: NumberFormatException) {
+        return null
+    } finally {
+        r.close()
+    }
+}
+
+fun readNum2(r: BufferedReader) {
+    // try 값을 변수에 대입 가능
+    val num = try {
+        Integer.parseInt(r.readLine())
+    } catch (e: NumberFormatException) {
+        null
+    }
+    println(num)
 }
