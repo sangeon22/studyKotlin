@@ -6,7 +6,10 @@ import com.example.studyKotlin.Color.*
 import com.example.studyKotlin.domain.Person
 import com.example.studyKotlin.domain.Rectangle
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import strings.joinToStringKotlin
 import strings.joinToStringKotlin2
+import strings.lastChar
+import strings.lastChar2 as lc2
 import java.io.BufferedReader
 import java.io.StringReader
 import java.util.Collections
@@ -99,6 +102,13 @@ fun main(args: Array<String>) {
 
     // 최상위 함수로 선언한 함수
     println(joinToStringKotlin2(list2, ", ", "", ""))
+
+    // 확장 함수 선언으로 String 클래스에 선언한 lastChar()
+    // "Kotlin"이 수신 객체, String은 수신 객체 타입
+    println("Kotlin".lastChar())
+    println("Kotlin".lc2())
+
+    println(list2.joinToStringKotlin(separator = ", ", prefix = "(", postfix = ")"))
 }
 
 data class Person1(
