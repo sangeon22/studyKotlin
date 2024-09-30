@@ -6,8 +6,10 @@ import com.example.studyKotlin.Color.*
 import com.example.studyKotlin.domain.Person
 import com.example.studyKotlin.domain.Rectangle
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import strings.joinToStringKotlin2
 import java.io.BufferedReader
 import java.io.StringReader
+import java.util.Collections
 import java.util.TreeMap
 
 @SpringBootApplication
@@ -85,6 +87,18 @@ fun main(args: Array<String>) {
     readNum2(BufferedReader(StringReader("abc")))
 
     collectionFunction()
+
+    val list2 = listOf(1, 2, 3)
+    println(joinToStringJava(list2, "; ", "(", ")"))
+
+    // Kotlin 디폴트 파라미터
+    println(joinToStringKotlin(list2, ", ", "", ""))
+    println(joinToStringKotlin(list2))
+    println(joinToStringKotlin(list2, "; "))
+    println(joinToStringKotlin(list2, separator = "*", postfix = "@@"))
+
+    // 최상위 함수로 선언한 함수
+    println(joinToStringKotlin2(list2, ", ", "", ""))
 }
 
 data class Person1(
@@ -263,7 +277,7 @@ fun collectionIterator() {
     }
 
     // document 보다가 궁금해서
-    for (element in list.distinct()){
+    for (element in list.distinct()) {
         println(element)
     }
 }
@@ -272,13 +286,13 @@ fun isLetter(c: Char) = c in 'a'..'z' || c in 'A'..'Z'
 
 fun isNotDigit(c: Char) = c !in '0'..'9'
 
-fun recognize(c: Char) = when(c) {
+fun recognize(c: Char) = when (c) {
     in '0'..'9' -> "It's a digit"
     in 'a'..'z', in 'A'..'Z' -> "It's a letter"
     else -> "no"
 }
 
-fun readNum(r: BufferedReader) :Int? {
+fun readNum(r: BufferedReader): Int? {
     try {
         val line = r.readLine()
         return Integer.parseInt(line)
@@ -322,3 +336,35 @@ fun collectionFunction() {
     println(list.last())
     println(set.min())
 }
+
+fun <T> joinToStringJava(
+    collection: Collection<T>,
+    separator: String,
+    prefix: String,
+    postfix: String
+): String {
+    val result = StringBuilder(prefix)
+    for ((idx, em) in collection.withIndex()) {
+        if (idx > 0) result.append(separator)
+        result.append(em)
+    }
+    result.append(postfix)
+    return result.toString()
+}
+
+// 각 파라미터 default 지정
+fun <T> joinToStringKotlin(
+    collection: Collection<T>,
+    separator: String = ", ",
+    prefix: String = "",
+    postfix: String = ""
+): String {
+    val result = StringBuilder(prefix)
+    for ((idx, em) in collection.withIndex()) {
+        if (idx > 0) result.append(separator)
+        result.append(em)
+    }
+    result.append(postfix)
+    return result.toString()
+}
+
