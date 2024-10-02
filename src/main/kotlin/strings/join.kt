@@ -28,6 +28,18 @@ fun String.lastChar2(): Char = get(length - 1)
 
 // 확장 함수로 인해 클래스의 캡슐화가 깨지진 않는다 -> private, protected 멤버를 사용할 수 없음
 
+// 확장프로퍼티
+// 뒷받침하는 필드가 없으므로 getter를 반드시 정의해야함(초기화 불가능하기 때문)
+val String.lastChar: Char
+    get() = get(length - 1)
+
+var StringBuilder.lastChar: Char
+    get() = get(length - 1)
+    set(value: Char) {
+        this.setCharAt(length - 1, value)
+    }
+
+
 fun <T> Collection<T>.joinToStringKotlin(
     separator: String = ", ",
     prefix: String = "",

@@ -3,8 +3,10 @@
 package com.example.studyKotlin
 
 import com.example.studyKotlin.Color.*
+import com.example.studyKotlin.domain.Button
 import com.example.studyKotlin.domain.Person
 import com.example.studyKotlin.domain.Rectangle
+import com.example.studyKotlin.domain.View
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import strings.joinToStringKotlin
 import strings.joinToStringKotlin2
@@ -109,6 +111,20 @@ fun main(args: Array<String>) {
     println("Kotlin".lc2())
 
     println(list2.joinToStringKotlin(separator = ", ", prefix = "(", postfix = ")"))
+
+    // 일반 함수는 이렇게 오버라이딩 된 함수가 호출
+    val view: View =  Button()
+    view.click()
+
+    // 확장 함수로 선언한 showOff
+    // 확장 함수는 정적으로 결정
+    view.showOff()
+
+    // 확장 프로퍼티
+    println("Kotlin".lastChar)
+    val stringBuilder = StringBuilder("Kotlin")
+    stringBuilder.lastChar = '!'
+    println(stringBuilder)
 }
 
 data class Person1(
@@ -377,4 +393,10 @@ fun <T> joinToStringKotlin(
     result.append(postfix)
     return result.toString()
 }
+
+fun View.showOff() = println("View")
+fun Button.showOff() = println("Button")
+
+
+
 
