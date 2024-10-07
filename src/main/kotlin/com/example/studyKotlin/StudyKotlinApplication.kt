@@ -138,10 +138,10 @@ fun main(args: Array<String>) {
 
     // 삼중 따옴표는 개행도 포함
     val txt =
-        """ |\
+        """|\
            .| \
            .|  \"""
-    println(txt)
+    println(txt.trimMargin("."))
 }
 
 data class Person1(
