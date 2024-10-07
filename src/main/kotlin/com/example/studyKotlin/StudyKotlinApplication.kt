@@ -125,6 +125,23 @@ fun main(args: Array<String>) {
     val stringBuilder = StringBuilder("Kotlin")
     stringBuilder.lastChar = '!'
     println(stringBuilder)
+
+    // java에서는 split으로 . 을 추출하면 빈 배열이 반환된다 따라서
+    // kotlin에서는 split 확장함수로 .나 - 정규식 사용
+    println("12.345-6.A".split("\\.|-".toRegex()))
+
+    // 또한 java랑 다르게 확장함수로 2개 이상의 구분자를 사용할 수 있다\
+    println("12.345-6.A".split("-","."))
+
+    parsePath("/Users/eoni/kotlin/chapter.adoc")
+    parsePathRegex("/Users/eoni/kotlin/chapter.adoc")
+
+    // 삼중 따옴표는 개행도 포함
+    val txt =
+        """ |\
+           .| \
+           .|  \"""
+    println(txt)
 }
 
 data class Person1(
@@ -397,6 +414,23 @@ fun <T> joinToStringKotlin(
 fun View.showOff() = println("View")
 fun Button.showOff() = println("Button")
 
+fun parsePath(path: String) {
+    val dir = path.substringBeforeLast("/")
+    val fullName = path.substringAfterLast("/")
+    val fileName = fullName.substringBeforeLast(".")
+    val ext = fullName.substringAfterLast(".")
 
+    println("Dir: $dir, name: $fileName, Ext: $ext")
+}
 
-
+fun parsePathRegex(path: String) {
+    // 삼중 """ """는 이스케이프 x
+    // 정규식 엔진은 가능한한 긴 부분 문자열과 매칭되므로 마지막 / 부분까지 매치된다
+    val regex = """(.+)/(.+)\.(.+)""".toRegex()
+    val matchResult = regex.matchEntire(path) // 매치안되면 null
+    if (matchResult != null) {
+        // 그룹별로 분해
+        val (dir, fileName, ext) = matchResult.destructured
+        println("Dir: $dir, name: $fileName, Ext: $ext")
+    }
+}
