@@ -7,6 +7,8 @@ import com.example.studyKotlin.domain.Button
 import com.example.studyKotlin.domain.Person
 import com.example.studyKotlin.domain.Rectangle
 import com.example.studyKotlin.domain.View
+import com.example.studyKotlin.domain.member.User
+import com.example.studyKotlin.domain.member.saveUser
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import strings.joinToStringKotlin
 import strings.joinToStringKotlin2
@@ -142,6 +144,8 @@ fun main(args: Array<String>) {
            .| \
            .|  \"""
     println(txt.trimMargin("."))
+
+    saveUser(User(1, "", ""))
 }
 
 data class Person1(
