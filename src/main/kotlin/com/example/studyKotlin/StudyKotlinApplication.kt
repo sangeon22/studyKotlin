@@ -145,7 +145,9 @@ fun main(args: Array<String>) {
            .|  \"""
     println(txt.trimMargin("."))
 
-    saveUser(User(1, "", ""))
+//    saveUser(User(1, "", ""))
+//    saveUser(User(1, "eoni", ""))
+//    saveUser(User(1, "", "pangyo"))
 }
 
 data class Person1(
