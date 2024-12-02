@@ -3,10 +3,7 @@
 package com.example.studyKotlin
 
 import com.example.studyKotlin.Color.*
-import com.example.studyKotlin.domain.Button
-import com.example.studyKotlin.domain.Person
-import com.example.studyKotlin.domain.Rectangle
-import com.example.studyKotlin.domain.View
+import com.example.studyKotlin.domain.*
 import com.example.studyKotlin.domain.member.User
 import com.example.studyKotlin.domain.member.saveUser
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -148,6 +145,15 @@ fun main(args: Array<String>) {
 //    saveUser(User(1, "", ""))
 //    saveUser(User(1, "eoni", ""))
 //    saveUser(User(1, "", "pangyo"))
+
+    val clickButton = ClickButton()
+    clickButton.click()
+    clickButton.showOff()
+
+//    val focusable = Focusable()
+//    Focusable().showOff()
+
+    clickButton.setFocus(true)
 }
 
 data class Person1(
