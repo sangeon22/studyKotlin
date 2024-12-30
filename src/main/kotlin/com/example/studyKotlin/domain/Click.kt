@@ -63,3 +63,21 @@ abstract class Animated {
 
     fun animateTwice() {}
 }
+
+// 같은 모듈 안에서만 볼 수 있음
+internal open class TalkativeButton : Focusable {
+    // 같은 클래스에서만 볼 수 있음
+    private fun yell() = println("yell")
+
+    // 자바에서는 같은 패키지라면 접근 가능하지만
+    // 코틀린에서는 하위 클래스에서만 볼 수 있음
+    protected fun whisper() = println("whisper")
+}
+
+/*
+// 해당 메서드는 public이므로 internal인 TalkativeButton 보다 개방적이므로 에러
+fun TalkativeButton.giveSpeech() {
+    yell() // private 이므로 에러
+    whisper() // 하위클래스가 아니므로 에러
+}
+*/
