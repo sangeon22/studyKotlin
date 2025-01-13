@@ -62,9 +62,9 @@ fun main(args: Array<String>) {
     println(mixOptimized(YELLOW, RED))
 //    println(mixOptimized(BLUE, GREEN))
 
-    println(eval(Sum(Sum(Num(1), Num(2)), Num(4))))
-    println(evalOptimized(Sum(Sum(Num(1), Num(2)), Num(4))))
-    println(evalWithLogging(Sum(Sum(Num(1), Num(2)), Num(4))))
+//    println(eval(Sum(Sum(Num(1), Num(2)), Num(4))))
+//    println(evalOptimized(Sum(Sum(Num(1), Num(2)), Num(4))))
+//    println(evalWithLogging(Sum(Sum(Num(1), Num(2)), Num(4))))
 
     for (i in 1..100) print(fizzBuzz(i))
     println()
@@ -113,7 +113,7 @@ fun main(args: Array<String>) {
 
     // 일반 함수는 이렇게 오버라이딩 된 함수가 호출
     val view: View =  Button()
-    view.click()
+//    view.click()
 
     // 확장 함수로 선언한 showOff
     // 확장 함수는 정적으로 결정
@@ -257,10 +257,10 @@ fun mixOptimized(c1: Color, c2: Color) =
         else -> throw Exception("Dirty Color")
     }
 
+/*
 interface Expr
 class Num(val value: Int) : Expr
 class Sum(val left: Expr, val right: Expr) : Expr
-
 
 fun eval(e: Expr): Int {
     // java에서 instanceOf 같은 타입 검사
@@ -298,6 +298,22 @@ fun evalWithLogging(e: Expr): Int =
 
         else -> throw IllegalArgumentException("Unknown expression")
     }
+
+*/
+
+// sealed 변경자로 하위 클래스 정의 제한
+sealed class Expr {
+    class Num(val value: Int) : Expr()
+    class Sum(val left: Expr, val right: Expr) : Expr()
+}
+
+fun eval(e: Expr): Int =
+    // 기존의 when default(else) 분기 처리 필요 X -> 하위 클래스를 모두 검사하므로
+    when (e) {
+        is Expr.Num -> e.value
+        is Expr.Sum -> eval(e.right) + eval(e.left)
+    }
+
 
 fun fizzBuzz(i: Int) = when {
     i % 15 == 0 -> "FizzBuzz "
