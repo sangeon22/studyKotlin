@@ -24,12 +24,29 @@ class FacebookUser(val accountId: Int) : User {
     override val nickname = getFacebookName(accountId) // 초기화식 프로퍼티 구성
 }
 
-fun getFacebookName(id : Int): String {
+fun getFacebookName(id: Int): String {
     return "Facebook${id}User"
+}
+
+class CUser(val name: String) {
+    // 프로퍼티가 초기화 될 때 마다 Custom Setter 동작하도록
+    var address: String = "unspecified"
+        set(value: String) {
+            println(
+                """
+                Address was changed for $name:
+                "$field" -> "$value".""".trimIndent()
+            )
+            field = value
+        }
 }
 
 fun main() {
     println(PrivateUser("test@google.com").nickname)
     println(SubscribingUser("test@google.com").nickname)
     println(FacebookUser(12).nickname)
+
+    val user = CUser("Alice")
+    user.address = "Elsenheimerstrasse 47, 80687 Muenchen"
+    println(user.address)
 }
