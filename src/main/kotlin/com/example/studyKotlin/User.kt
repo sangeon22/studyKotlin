@@ -41,6 +41,17 @@ class CUser(val name: String) {
         }
 }
 
+class LengthCount {
+    var count: Int = 0
+        private set //private setter 이 클래스 밖에서 이 프로퍼티의 값을 바꿀 수 있음
+
+    // lateinit?
+
+    fun addWord(word: String) {
+        count += word.length
+    }
+}
+
 fun main() {
     println(PrivateUser("test@google.com").nickname)
     println(SubscribingUser("test@google.com").nickname)
@@ -49,4 +60,8 @@ fun main() {
     val user = CUser("Alice")
     user.address = "Elsenheimerstrasse 47, 80687 Muenchen"
     println(user.address)
+
+    val lengthCount = LengthCount()
+    lengthCount.addWord("Test!")
+    println(lengthCount.count)
 }
