@@ -24,6 +24,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("com.google.code.gson:gson:2.8.9")
+
 //	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 //	implementation("mysql:mysql-connector-java:8.0.33")
 //	testImplementation("org.springframework.boot:spring-boot-starter-test")
