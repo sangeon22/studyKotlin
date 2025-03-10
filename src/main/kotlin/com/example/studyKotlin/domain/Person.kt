@@ -11,6 +11,9 @@ class Person(
     companion object Loader {
         fun fromJSON(jsonText: String) : Person = Gson().fromJson(jsonText, Person::class.java)
      }
+    // 왜 클래스 안에 메서드로 안할까? -> static 처럼 불필요한 객체 생성이 없어짐
+    // 그럼 전역 메서드로 하면되지 않나? -> Person과 관계성?이 낮아지기 때문에 companion obejct가 추천되는 듯
+     // 그래서 Person에 관련된 기능은 companion object로 묶는 게 더 직관적이고 객체지향적
 }
 
 fun main() {
