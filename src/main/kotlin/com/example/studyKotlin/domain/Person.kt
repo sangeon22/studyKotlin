@@ -1,15 +1,20 @@
 package com.example.studyKotlin.domain
 
+import com.fasterxml.jackson.core.JsonFactory
 import com.google.gson.Gson
 
+interface JSONFactory<T> {
+    fun fromJSON(jsonText: String) : T
+}
 class Person(
     // val, var 차이에 맞게 val -> getter(), var -> getter(), setter()
     val name: String,
     var isMarried: Boolean
 ) {
     // 동반객체에 Loader라는 이름을 붙혀서 일반객체처럼 사용
-    companion object Loader {
-        fun fromJSON(jsonText: String) : Person = Gson().fromJson(jsonText, Person::class.java)
+    companion object : JSONFactory<Person> {
+        // 동반 객체가 인터페이스 구현 가능
+        override fun fromJSON(jsonText: String) : Person = Gson().fromJson(jsonText, Person::class.java)
      }
     // 왜 클래스 안에 메서드로 안할까? -> static 처럼 불필요한 객체 생성이 없어짐
     // 그럼 전역 메서드로 하면되지 않나? -> Person과 관계성?이 낮아지기 때문에 companion obejct가 추천되는 듯
@@ -17,7 +22,7 @@ class Person(
 }
 
 fun main() {
-    val person1 = Person.Loader.fromJSON("{name: 'Dmitry'}")
+    val person1 = Person.fromJSON("{name: 'Dmitry'}")
     println(person1.name)
 
     val person2 = Person.fromJSON("{name: 'eoni'}")
